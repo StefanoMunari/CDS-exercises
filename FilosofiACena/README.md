@@ -1,4 +1,5 @@
-# Problemi progettuali di concorrenza - Filosofi a cena
+# Problemi progettuali di concorrenza   
+# - Filosofi a cena -
 
 Il problema è stato delineato dall'informatico olandese
 [Edsger Wybe Dijkstra](https://it.wikipedia.org/wiki/Edsger_Dijkstra),
