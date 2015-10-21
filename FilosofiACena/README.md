@@ -14,7 +14,7 @@ Ogni filosofo ha alla sua destra una forchetta e di fronte a sè un piatto.
 Ogni filosofo alterna un periodo in cui medita ad un periodo in cui si nutre.  
 Ogni filosofo necessita di 2 forchette per potersi nutrire.  
 
-![alt text](./img/filosofi.jpg "Rappresentazione del problema dei filosofi a cena")
+![alt text](../img/filosofi.jpg "Rappresentazione del problema dei filosofi a cena")
 
 
 ## Analisi del problema
