@@ -3,7 +3,7 @@ package body Ring is
    protected body Station is
 
    entry Alight (Destination : Station_Address)
-     -- coda secondaria di fermata
+        -- coda secondaria di fermata
         -- per i passeggeri che sono saliti ed hanno indicato un determinato
         -- indirizzo
      -- di arrivo
@@ -14,10 +14,10 @@ package body Ring is
 
    entry Arrive (Destination : Station_Address)
    --  coda primaria di salita sul treno
-     when TrainBoarding and then On_Train < Capacity is
-      begin
-	    On_Train := On_Train +1; --  aggiunge un passeggero
-         requeue Station (Destination).Alight;
+     when TrainBoarding and then Integer (On_Train) < Capacity is
+   begin
+         On_Train := On_Train + 1; --  aggiunge un passeggero
+         requeue Stations (Destination).Alight;
    end Arrive;
 
    procedure Stopping (P : Passengers) is
@@ -48,27 +48,26 @@ package body Ring is
       --  il treno si pu� considerare nello stato implicito
       --  "in transito"
    end CloseDoors;
-end Station;
+   end Station;
 
    task body Train is
       Volume : Passengers := 0;
-      Travel_Times : array(Station_Address) of Duration := 2.0;
-begin
+   begin
       loop
          for S in Station_Address loop
-            Station (S).Stopping(Volume);
-            Station (S).Boarding;
-            Station (S).CloseDoors(Volume);
+            Stations (S).Stopping (Volume);
+            Stations (S).Boarding;
+            Stations (S).CloseDoors (Volume);
             delay Travel_Times (S);
          end loop;
       end loop;
-end Train;
+   end Train;
 
    task body Clients is
       Home, Away : Station_Address;
    begin
       loop
-         Station (Home).Arrive (Away);
+         Stations (Home).Arrive (Away);
          Home := Away;
       end loop;
    end Clients;

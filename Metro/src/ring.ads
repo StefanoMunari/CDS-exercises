@@ -24,5 +24,6 @@ package Ring is
 
 --  Train
    task Train;
+   Travel_Times : array (Station_Address) of Duration;
 
 end Ring;

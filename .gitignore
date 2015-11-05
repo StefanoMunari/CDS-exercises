@@ -4,6 +4,13 @@
 # Ada Library Information
 *.ali
 
+# Ada binaries
+*.o
+
+# Ada GPS
+*.db
+*.cgpr
+
 # Bytecode
 *.class
 
