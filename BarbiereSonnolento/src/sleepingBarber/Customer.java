@@ -1,7 +1,8 @@
 /**
+	* @author Stefano Munari <stefanomunari.sm@gmail.com>
+	*
  * @class sleepingBarber.Customer
- * @author Stefano Munari <stefanomunari.sm@gmail.com>
- * @classdesc Implements the Customer's behaviour: wait on accessShop mutex: 
+ * @classdesc Implements the Customer's behaviour: wait on accessShop mutex:
  * this mutex controls the access to barberServiceQueue resource, a counter of customers queued inside the shop.
  * barberService is counter semaphore for the customers.
  * Customer who has been served notifies the barber so the barber can serve another customer.
@@ -20,33 +21,34 @@ class Customer extends Thread{
 	private Semaphore barberService;
 	private Semaphore accessShop;
 	private AtomicInteger barberServiceQueue = null;
-	
+
 	private void getMyHaircut()
 	{
-		try 
+		try
 		{
 			System.out.println("The customer "+id+" is ready...");
 			Thread.sleep(((long) Math.random())*5000);
-		} 
+		}
 		catch (InterruptedException e)
 		{
 			e.printStackTrace();
 		}
 	}
-	
+
 	public Customer(final int id,Semaphore customers,Semaphore accessShop ,Semaphore barberService, AtomicInteger barberServiceQueue)
 	{
 		this.id=id;
 		this.customers = customers;
 		this.accessShop = accessShop;
 		this.barberService = barberService;
-		this.barberServiceQueue = barberServiceQueue; // counts the number of customers in barberService queue
+		this.barberServiceQueue = barberServiceQueue; // counts the number of customers in barberService's queue
 	}
 
 	@Override
-	public void run() 
+	public void run()
 	{
-		try {
+		try
+		{
 			accessShop.acquire();
 			if(barberServiceQueue.get() == BarberShop.MAX_SEATS)
 			{
@@ -67,11 +69,10 @@ class Customer extends Thread{
 				System.out.println("Now the customer "+id+" is a real bald man.");
 			}
 		}
-		catch (InterruptedException e) 
+		catch (InterruptedException e)
 		{
 			e.printStackTrace();
 		}
 	}
-		
-}
 
+}

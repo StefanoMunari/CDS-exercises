@@ -1,7 +1,8 @@
 /**
- * @class sleepingBarber.Barber
  * @author Stefano Munari <stefanomunari.sm@gmail.com>
- * @classdesc Implements the Barber's behaviour: wait on customer mutex, when 
+ *
+ * @class sleepingBarber.Barber
+ * @classdesc Implements the Barber's behaviour: wait on customer mutex, when
  * the semaphore is released the barber release the barberService semaphore so the customer
  * in the barberService's queue can be served.
  * be served
@@ -12,16 +13,16 @@ package sleepingBarber;
 import java.util.concurrent.Semaphore;
 
 class Barber extends Thread {
-	private Semaphore customers = null; 
+	private Semaphore customers = null;
 	private Semaphore barberService = null;
-	
+
 	private void cut()
 	{
-		try 
+		try
 		{
 			System.out.println("The barber is working...");
 			Thread.sleep(3000);
-		} 
+		}
 		catch (InterruptedException e)
 		{
 			e.printStackTrace();
@@ -33,22 +34,22 @@ class Barber extends Thread {
 		this.customers = customers;
 		this.barberService = barberService;
 	}
-	
+
 	@Override
 	public void run() {
 		try
 		{
-			while(true) 
+			while(true)
 			{
 				customers.acquire();
 				barberService.release();
 				this.cut();
-			} 
+			}
 		}
-		catch (InterruptedException e) 
+		catch (InterruptedException e)
 		{
 			e.printStackTrace();
 		}
 	}
-	
+
 }
