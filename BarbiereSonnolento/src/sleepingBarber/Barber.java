@@ -1,3 +1,11 @@
+/**
+ * @class sleepingBarber.Barber
+ * @author Stefano Munari <stefanomunari.sm@gmail.com>
+ * @classdesc This class implements the Barber's behaviour: wait on customer semaphore, when 
+ * the semaphore is released the barber release the barberService semaphore so the customer can 
+ * be served
+ * @see sleepingBarber.Customer
+ */
 package sleepingBarber;
 
 import java.util.concurrent.Semaphore;
@@ -11,7 +19,7 @@ class Barber extends Thread {
 		try 
 		{
 			System.out.println("The barber is working...");
-			Thread.sleep(9999);
+			Thread.sleep(3000);
 		} 
 		catch (InterruptedException e)
 		{
