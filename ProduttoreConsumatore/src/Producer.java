@@ -1,3 +1,12 @@
+/**
+ * @author Stefano Munari <stefanomunari.sm@gmail.com>
+ *
+ * @class producerConsumer.Consumer
+ * @classdesc thread class: shared buffer is the only field.
+ * inside an infinite loop it calls inserisci
+ * to insert an int into the buffer
+ * @see producerConsumer.Monitor
+ */
 package producerConsumer;
 
 import java.util.Random;
@@ -12,13 +21,12 @@ public class Producer implements Runnable{
 
 	@Override
 	public void run() {
-		Random r=null;
-		try {
+		try
+		{
 			while(true)
 			{
-				r=new Random();
 				monitor.inserisci(1);
-				Thread.sleep(r.nextInt(100 + 1));
+				Thread.sleep((new Random()).nextInt(100 + 1));
 			}
 		}
 		catch (InterruptedException e)
