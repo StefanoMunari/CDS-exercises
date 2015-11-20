@@ -1,8 +1,16 @@
+/**
+ * @author Stefano Munari <stefanomunari.sm@gmail.com>
+ *
+ * @class producerConsumer.Consumer
+ * @classdesc thread class: shared buffer is the only field, calls preleva
+ * to get an int from the buffer
+ * @see producerConsumer.Monitor
+ */
 package producerConsumer;
 
 import java.util.Random;
 
-public class Consumer implements Runnable {
+class Consumer implements Runnable {
 
 	private Monitor monitor;
 
@@ -12,13 +20,12 @@ public class Consumer implements Runnable {
 
 	@Override
 	public void run() {
-		try {
-			Random r=null;
+		try
+		{
 			while(true)
 			{
-				r=new Random();
 				monitor.preleva();
-				Thread.sleep(r.nextInt(100 + 1));
+				Thread.sleep((new Random()).nextInt(100 + 1));
 			}
 		}
 		catch (InterruptedException e)
