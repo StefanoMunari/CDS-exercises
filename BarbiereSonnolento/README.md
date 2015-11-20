@@ -33,11 +33,12 @@ possibilità di essere servito in un tempo finito quindi si deve evitare
 
 ## Soluzione implementata
 Nella soluzione implementata sono stati utilizzate 2 tipologie differenti
-di semafori:
+di semafori:  
 1. **Semaforo contatore**: è stato utilizzato per gestire la coda di clienti in
-attesa;
+attesa;  
 2. **Mutex**: è un semaforo binario, è stato utilizzato per garantire mutua
-esclusione (mutex) nell'accesso alla risorsa *poltrona di lavoro*.  
+esclusione (mutex) nell'accesso alla risorsa *negozio del barbiere* e *cliente*,
+quest'ultimo inteso come mutex di attesa per il barbiere. 
 
 Al fine di evitare *starvation* è stata applicata una politica *FIFO* ai
 processi in coda per il servizio del barbiere. *FIFO* garantisce
