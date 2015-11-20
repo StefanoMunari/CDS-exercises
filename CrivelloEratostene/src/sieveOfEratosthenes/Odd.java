@@ -1,6 +1,6 @@
 package sieveOfEratosthenes;
 
-public class Odd implements Runnable{
+class Odd implements Runnable{
 	private int nmax;
 	private boolean [] result;
 	private SharedBuffer output=new SharedBuffer();//pensato come uno buffer/canale di output per Odd
