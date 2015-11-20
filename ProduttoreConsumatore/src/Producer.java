@@ -11,7 +11,7 @@ package producerConsumer;
 
 import java.util.Random;
 
-public class Producer implements Runnable{
+class Producer implements Runnable{
 
 	private Monitor monitor;
 
