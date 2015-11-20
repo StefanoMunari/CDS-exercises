@@ -1,15 +1,24 @@
+/**
+ * @author Stefano Munari <stefanomunari.sm@gmail.com>
+ *
+ * @class producerConsumer.Monitor
+ * @classdesc encapsulates exclusive access at buffer resource
+ * inside synchronized public methods inserisci and preleva
+ * checking and then modifying the state of the buffer.
+ */
 package producerConsumer;
 
 public class Monitor {
-	private int cont=0;
-	private final int MAX=9;
+	private int cont=0; // counter for buffer's state
+	private final int MAX=9;// max buffer's size
 
 	private void blocca()
 	{
 		try {
 			wait();
 		}
-		catch (InterruptedException e) {
+		catch (InterruptedException e)
+		{
 			e.printStackTrace();
 		}
 	}
@@ -18,7 +27,7 @@ public class Monitor {
 	{
 		if(cont == MAX)
 			blocca();
-		cont= cont+1;//inserisce nel contenitore
+		cont= cont+1; // insert in the buffer
 		System.out.println("P*** "+cont+" ***");
 		if(cont == 1)
 			notifyAll();
@@ -29,9 +38,9 @@ public class Monitor {
 		int prod;
 		if(cont == 0)
 			blocca();
-		prod=cont;//preleva dal contenitore
+		prod=cont; // get from the buffer
 		cont= cont-1;
-		System.out.println("C*** "+cont+" ***");
+		System.out.println("G*** "+cont+" ***");
 		if(cont== MAX-1)
 			notifyAll();
 		return prod;
