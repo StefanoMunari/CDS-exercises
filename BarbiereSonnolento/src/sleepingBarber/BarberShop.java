@@ -1,3 +1,9 @@
+/**
+ * @class sleepingBarber.BarberShop
+ * @author Stefano Munari <stefanomunari.sm@gmail.com>
+ * @classdesc Main class: creates static costants, instantiates semaphores (with FIFO priority), instatiates the barber and an infinite
+ * number of customers.
+ */
 package sleepingBarber;
 
 import java.util.concurrent.Semaphore;
@@ -30,12 +36,12 @@ class BarberShop {
 		System.out.println("**** THE SLEEPING BARBER SHOP ****");
  		System.out.println("**********************************");
 		
-		final Semaphore customers = new Semaphore(0);
-		final Semaphore accessShop = new Semaphore(1);
+		final Semaphore customers = new Semaphore(0); // initially busy
+		final Semaphore accessShop = new Semaphore(1); // initially free
 		final Semaphore barberService = new Semaphore(MAX_SEATS,true);
 		final AtomicInteger barberServiceQueue = new AtomicInteger(0);
 		//initializing Semaphore to True guarantees fairness for queues
-		//for Mutex we don't need a FIFO policy because there will be at most one process queued
+		//for mutex we don't need a FIFO policy because there will be at most one process queued
 		
 		new Barber(customers, barberService).start();
 		

@@ -1,8 +1,9 @@
 /**
  * @class sleepingBarber.Barber
  * @author Stefano Munari <stefanomunari.sm@gmail.com>
- * @classdesc This class implements the Barber's behaviour: wait on customer semaphore, when 
- * the semaphore is released the barber release the barberService semaphore so the customer can 
+ * @classdesc Implements the Barber's behaviour: wait on customer mutex, when 
+ * the semaphore is released the barber release the barberService semaphore so the customer
+ * in the barberService's queue can be served.
  * be served
  * @see sleepingBarber.Customer
  */

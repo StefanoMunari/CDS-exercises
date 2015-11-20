@@ -1,3 +1,14 @@
+/**
+ * @class sleepingBarber.Customer
+ * @author Stefano Munari <stefanomunari.sm@gmail.com>
+ * @classdesc Implements the Customer's behaviour: wait on accessShop mutex: 
+ * this mutex controls the access to barberServiceQueue resource, a counter of customers queued inside the shop.
+ * barberService is counter semaphore for the customers.
+ * Customer who has been served notifies the barber so the barber can serve another customer.
+ * The counter barberServiceQueue enables to create some delay between the queue and the service
+ * so we can execute (potentially) all the customer's branches.
+ * @see sleepingBarber.Barber
+ */
 package sleepingBarber;
 
 import java.util.concurrent.Semaphore;
