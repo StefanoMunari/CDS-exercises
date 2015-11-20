@@ -8,7 +8,7 @@
  */
 package producerConsumer;
 
-public class Monitor {
+class Monitor {
 	private int cont=0; // counter for buffer's state
 	private final int MAX=9;// max buffer's size
 
