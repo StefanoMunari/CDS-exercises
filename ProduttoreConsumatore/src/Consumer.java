@@ -3,7 +3,7 @@
  *
  * @class producerConsumer.Consumer
  * @classdesc thread class: shared buffer is the only field, calls preleva
- * to get an int from the buffer
+ * to get an int from the buffer inside an infinite loop
  * @see producerConsumer.Monitor
  */
 package producerConsumer;
