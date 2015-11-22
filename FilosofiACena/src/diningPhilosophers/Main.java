@@ -1,3 +1,10 @@
+/**
+ * @author Stefano Munari <stefanomunari.sm@gmail.com>
+ *
+ * @class diningPhilosophers.Main
+ * @classdesc Entry point of the program, instantiates the monitor wtih the number,
+ * then creates and starts the philosophers instances passing the monitor as shared object.
+ */
 package diningPhilosophers;
 
 class Main {

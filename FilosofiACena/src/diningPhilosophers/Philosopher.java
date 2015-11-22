@@ -1,3 +1,9 @@
+/**
+ * @author Stefano Munari <stefanomunari.sm@gmail.com>
+ *
+ * @class diningPhilosophers.Philosopher
+ * @classdesc It holds a monitor that allows each philosopher to synchronize access to the forks.
+ */
 package diningPhilosophers;
 
 class Philosopher implements Runnable {

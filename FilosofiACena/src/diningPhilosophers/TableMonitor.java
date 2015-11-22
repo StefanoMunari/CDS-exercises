@@ -1,3 +1,12 @@
+/**
+ * @author Stefano Munari <stefanomunari.sm@gmail.com>
+ *
+ * @class diningPhilosophers.TableMonitor
+ * @classdesc the synchronized methods enables mutual exclusive access to TableMonitor.
+ * each Philosopher check if each fork that he needs is free before using it. 
+ * This version of TableMonitor enables "parallel eatings", that can occur if the number of philosophers at the table is >= 4,
+ * because every philosopher deals with forks it needs and not the other forks .
+ */
 package diningPhilosophers;
 
 class TableMonitor {
