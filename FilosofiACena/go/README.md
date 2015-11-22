@@ -2,3 +2,6 @@
 
 Naive implementation (subject to deadlock hazard):
 `` bash deadlockDiningPhilosophers.sh ``
+
+Deadlock-free implementation:
+`` bash leftDiningPhilosophers.sh ``
