@@ -5,3 +5,6 @@ Naive implementation (subject to deadlock hazard):
 
 Deadlock-free implementation:
 `` bash leftDiningPhilosophers.sh ``
+
+Deadlock-free implementation with giant lock (mutex):
+`` bash mutexDiningPhilosophers.sh ``
