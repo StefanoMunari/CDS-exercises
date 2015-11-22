@@ -1,6 +1,6 @@
 package diningPhilosophers;
 
-public class TableMonitor {
+class TableMonitor {
 	//FIELDS
 	private boolean[] lockedFork;
 	

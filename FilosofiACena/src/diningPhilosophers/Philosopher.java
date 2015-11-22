@@ -1,6 +1,6 @@
 package diningPhilosophers;
 
-public class Philosopher implements Runnable {
+class Philosopher implements Runnable {
 	//FIELDS
 	private TableMonitor table;
 	private int tablePosition;

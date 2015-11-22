@@ -1,6 +1,6 @@
 package diningPhilosophers;
 
-public class Main {
+class Main {
 	private static final int NPHILOSHOPERS=5;
 
 	public static void main(String[] args) {
