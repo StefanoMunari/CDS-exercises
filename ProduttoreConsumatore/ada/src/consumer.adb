@@ -1,4 +1,3 @@
-with System;
 with Ada.Text_IO;
 
 package body Consumer is
