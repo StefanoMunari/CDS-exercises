@@ -1,5 +1,4 @@
-# Object file
-*.o
+# == ADA ==
 
 # Ada Library Information
 *.ali
@@ -10,6 +9,9 @@
 # Ada GPS
 *.db
 *.cgpr
+obj/
+
+# == JAVA ==
 
 # Bytecode
 *.class
