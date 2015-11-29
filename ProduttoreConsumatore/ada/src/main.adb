@@ -1,6 +1,7 @@
+-- v0.1 : implementazione : Sebastiano Valle
+-- v0.2 : correzione package : Stefano Munari
 with Producer;
 with Consumer;
-with Buffers;
 
 procedure Main is
    use Producer
