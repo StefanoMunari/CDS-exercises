@@ -1,6 +1,4 @@
-with System;
 with Ada.Text_IO;
-with Random_Numbers;
 
 package body Producer is
 
