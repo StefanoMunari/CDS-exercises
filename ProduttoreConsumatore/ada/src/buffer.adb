@@ -1,11 +1,11 @@
 with System;
 with Ada.Text_IO;
 
-package body Buffers is
+package body Buffer is
 
    use Ada.Text_IO;
 
-   protected body Buffer is
+   protected body Buffer_I is
 
       entry Put when Number_Of_Items < Buffer_Size is
       begin
@@ -21,6 +21,6 @@ package body Buffers is
                   & Positive'Image(Number_Of_Items));
       end Take;
 
-   end Buffer;
+   end Buffer_I;
 
-end Buffers;
+end Buffer;

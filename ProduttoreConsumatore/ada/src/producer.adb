@@ -1,19 +1,19 @@
 with Ada.Text_IO;
+with Buffer;
+with Random;
 
 package body Producer is
 
    task body Producer_T is
 
       use Ada.Text_IO,
-          Buffers;
-
-      P_Interval : constant Duration := 0.5;
-
+          Buffer,
+          Random;
    begin
       loop
-         Buffer.Put;
-         Put_Line("Put");
-         delay P_Interval;
+         Buffer_I.Put;
+         Put_Line("working Producer :" & Integer'Image(Id));
+         delay Duration(generateRandom);
       end loop;
    end Producer_T;
 
