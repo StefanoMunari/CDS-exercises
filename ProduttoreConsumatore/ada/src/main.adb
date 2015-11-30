@@ -4,11 +4,12 @@
 -- v0.4 : inserito generatore Random : Stefano Munari
 -- v0.5 : refactoring Main, producer consumer con Random e Id : Stefano Munari
 -- v0.6 : generalizzata Random : Stefano Munari
+-- v0.7 : aggiunta documentazione : Sebastiano Valle
 with Ada.Text_IO;
 with Producer;
 with Consumer;
 with Random;
- 
+
 procedure Main is
    use Producer, Consumer, Random, Ada.Text_IO;
 
