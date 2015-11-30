@@ -1,3 +1,3 @@
 package Random is
-   function generateRandom return Positive;
+   function generateRandom (LowerBound, UpperBound : in Positive) return Positive;
 end Random;

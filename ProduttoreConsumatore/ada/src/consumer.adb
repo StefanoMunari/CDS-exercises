@@ -13,8 +13,8 @@ package body Consumer is
    begin
       loop
          Buffer_I.Take;
-         Put_Line("working Consumer : " & Integer'Image(Id) );
-         delay Duration(generateRandom);
+         Put_Line("working Consumer Id: " & Integer'Image(Id) );
+         delay Duration(generateRandom(1,3));
       end loop;
    end Consumer_T;
 

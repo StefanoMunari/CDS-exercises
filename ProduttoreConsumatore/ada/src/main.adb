@@ -3,6 +3,7 @@
 -- v0.3 : modificati nomi Buffer : Stefano Munari
 -- v0.4 : inserito generatore Random : Stefano Munari
 -- v0.5 : refactoring Main, producer consumer con Random e Id : Stefano Munari
+-- v0.6 : generalizzata Random : Stefano Munari
 with Ada.Text_IO;
 with Producer;
 with Consumer;
@@ -13,7 +14,7 @@ procedure Main is
 
    A_Producer : Producer_Ref;
    A_Consumer : Consumer_Ref;
-   Limit : Positive := generateRandom; -- default value is >=2
+   Limit : Positive := generateRandom (2 , 20); -- default value is >=2
    Index : Integer := 0;
    Id : Integer := 0;
    Interval : constant Duration := 3.5; -- 3.5s interval

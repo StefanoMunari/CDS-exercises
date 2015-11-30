@@ -12,8 +12,8 @@ package body Producer is
    begin
       loop
          Buffer_I.Put;
-         Put_Line("working Producer :" & Integer'Image(Id));
-         delay Duration(generateRandom);
+         Put_Line("working Producer Id:" & Integer'Image(Id));
+         delay Duration(generateRandom(1,4));
       end loop;
    end Producer_T;
 
