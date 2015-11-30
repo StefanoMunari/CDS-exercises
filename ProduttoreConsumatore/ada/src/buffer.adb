@@ -1,6 +1,6 @@
 with System;
 with Ada.Text_IO;
-
+ 
 package body Buffer is
 
    use Ada.Text_IO;

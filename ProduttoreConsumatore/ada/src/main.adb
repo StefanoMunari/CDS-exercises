@@ -8,7 +8,7 @@ with Ada.Text_IO;
 with Producer;
 with Consumer;
 with Random;
-
+ 
 procedure Main is
    use Producer, Consumer, Random, Ada.Text_IO;
 

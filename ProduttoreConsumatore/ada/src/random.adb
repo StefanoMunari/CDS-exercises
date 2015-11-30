@@ -1,6 +1,6 @@
 with Ada.Numerics.discrete_Random;
 with Ada.Text_IO;
-
+ 
 package body Random is
 
    function generateRandom (LowerBound, UpperBound : in Positive) return Positive is

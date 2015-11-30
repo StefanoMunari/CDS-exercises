@@ -1,7 +1,7 @@
 with Ada.Text_IO;
 with Buffer;
 with Random;
-
+ 
 package body Consumer is
 
    task body Consumer_T is

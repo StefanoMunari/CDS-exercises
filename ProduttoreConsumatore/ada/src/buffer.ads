@@ -1,5 +1,5 @@
 package Buffer is
-
+ 
    Buffer_Size : constant Natural := 4;
    subtype Max_In_Buffer is Natural range 0 .. Buffer_Size;
 
