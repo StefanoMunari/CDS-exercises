@@ -1,55 +1,47 @@
-# Problemi progettuali di concorrenza   
-# - Filosofi a cena -
+# - Dining Philosophers -
 
-Il problema è stato delineato dall'informatico olandese
+The problem was defined by the famous Dutch computer scientist
 [Edsger Wybe Dijkstra](https://it.wikipedia.org/wiki/Edsger_Dijkstra),
- vincitore del premio Turing nel 1972.  
-Si tratta di un problema di controllo della concorrenza, in particolare
-si vuole gestire la corretta sincronizzazione delle risorse tra
-processi concorrenti.
+winner of the 1972's Turing Award.
+The problem is about managing concurrency, specifically when dealing with
+concurrent processes which wants access the same resources at the same time.
 
-## Descrizione
+## Description
 
-5 filosofi sono seduti attorno ad un tavolo circolare.  
-Ogni filosofo ha alla sua destra una forchetta e di fronte a sè un piatto.  
-Ogni filosofo alterna un periodo in cui medita ad un periodo in cui si nutre.  
-Ogni filosofo necessita di 2 forchette per potersi nutrire.  
+* N philosophers are sat around a round table
+* Each philosopher has a fork on his right and a plate in front of him
+* Each philosopher continues to think, eat and then repeat the routine
+* Each philosopher needs 2 forks to eat
 
-![alt text](../../img/filosofi.jpg "Rappresentazione del problema dei filosofi a cena")
+![alt text](../../img/filosofi.jpg "Figure with dining philosophers")
 
 
-## Analisi del problema
+## Problem analysis
 
-È facile vedere come ogni filosofo rappresenti un processo
-che necessita di determinate condizioni (il possesso di due forchette)
-per poter eseguire un determinato compito (mangiare).
-Da una breve analisi, considerando che ogni filosofo può utilizzare
-solo forchette alla destra e alla sinistra del suo piatto, risulta
-che possono essere in esecuzione parallela al più 2 filosofi in uno scenario con 5 filosofi a cena.  
-Generalizzando possiamo dire che per n filosofi/processi con n >= 4 la soluzione può diventare in parte parallelizzabile. Si possono avere al più
-⌊n/2⌋ in esecuzione parallela, mentre gli altri saranno in esecuzione concorrente.  
-In termini di concorrenza si deve trovare una soluzione che:
-* Eviti deadlock;
-* Eviti starvation;
-* Eviti attese attive.
+Every philosopher can be represented as a process (or an agent) that must
+satisfy some constraints (get each one of the forks) to accomplish a given task
+(eating).
+After a brief analysis, it turns out that with five dining philosophers only
+two of them can eat at the same time.
+Taking a further step, we can say that if we have __n__ philosophers/processes,
+with n>=4, then the solution can be done with ⌊n/2⌋ agents that eat/execute at
+the same time.
+A good parallel solution needs to take in account some concurrency risks. A
+good concurrent solution has to avoid:
+* deadlocks (there must be at least one process that can proceed with its job);
+* starvation (every process should be able to do its job);
+* polling or busy waiting (processes must not occupy the CPU for a long time
+  without carrying out their job).
 
-## Soluzione limite - Algoritmo di Peterson
+## A first (almost) good solution -- Peterson's algorithm
 
-Una possibile soluzione al problema consiste nell'applicazione
-dell'[algoritmo di Peterson](https://it.wikipedia.org/wiki/Algoritmo_di_Peterson).
-L'algoritmo di Peterson generalizzato viene indicato come *Filter Algorithm*.
+A possible solution to get rid of the problem is to apply the
+dell'[Peterson's algorithm](https://it.wikipedia.org/wiki/Algoritmo_di_Peterson).
+Peterson's algorithm is also known as *Filter Algorithm*.
 
-## Considerazioni sull'algoritmo di Peterson
+## Discussing Peterson's algorithm application
 
-Questa soluzione risolve deadlock e starvation.  
-Tuttavia non risolve il problema dell'attesa attiva in quanto
-ogni processo impegna la CPU anche quando non è in esecuzione.
-
-## Soluzione implementata
-
-La soluzione implementata implementa un monitor (TableMonitor) in una modalità
-che permette di parallelizzare l'esecuzione per ⌊n/2⌋ processi evitando starvation,
- deadlock ed attesa attiva.
-Questo si ottiene prendendo il lock sulle coppie di forchette, in pratica
-ogni filosofo prende i lock SOLO sulle forchette che gli interessano. Non esiste
-quindi un lock "globale" sul tavolo.
+This solution comply with the first two requirements of a good solution, i.e.
+absence of deadlocks and absence of starvation.
+However there is busy wait because every process occupies the CPU even where
+there is no need of.
