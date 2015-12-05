@@ -1,18 +1,14 @@
-# Problemi progettuali di concorrenza  
-# - Il crivello di Eratostene -  
+# - Sieve of Erathostenes -
 
-Il crivello di Eratostene è un procedimento utilizzato
-per verificare se un dato numero x è primo.    
-Viene proposto un algoritmo che implementa il crivello
-di Eratostene. L'implementazione dell'algoritmo è composta
-da una parte concorrente che risolve il problema della sincronizzazione
-su un buffer condiviso da parte degli n processi in esecuzione.  
+The Sieve of Eratosthenes is method that is used to find the prime numbers
+that are lower then a given number x.
 
-## Componenti  
+## Componenti
 
-**Odd**: seleziona tutti i numeri dispari in un intervallo prefissato.  
+There are several agents which executes concurrently to carry out the task.
 
-**Sieve**: rileva, tra i numeri dispari ricevuti, quelli non divisibili per un numero primo noto.  
-Sieve passa tutti i numeri non divisibili per il numero primo ricevuto al prossimo Sieve t.c. quest'ultimo utilizzi il primo passato come nuovo primo.  
++ **Odd**: passes all odd numbers lower than x to the first sieve;
 
-Ogni processo Sieve opera come filtro per un numero primo noto < x
++ **Sieve**: receives firstly a prime number p and then filters each number
+  that can be divided for p, letting pass only the possible prime numbers to
+  the next sieve.
