@@ -9,6 +9,9 @@ package body Pusher is
       use Ada.Text_IO;
 
    begin
+      --  TODO: Add random generator of resources
+      --  TODO: Loop resource provision without delay
+      Table.Put(0);
       Put_Line ("Pusher created");
    end Pusher_T;
 
