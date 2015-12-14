@@ -10,22 +10,22 @@ package body Pusher is
        Table,
        Random;
 
-   Nat_A : Natural;
-   Nat_B : Natural;
+   Missing_Resource : Positive;-- can't be Empty
 
    task body Pusher_T is
    begin
+      Put_Line ("Pusher " & Name & " has been created! ");
       loop
-         generateRandom (1,3, Nat_A);
-         loop
-            generateRandom (1,3,Nat_B);
-            exit when Nat_A /= Nat_B;
-         end loop;
+         -- generates a random integer number in range [1..3]
+         generateRandom (1,3, Missing_Resource);
 
-         Table.Table_I.Put(Resource.Resource_T( Resource.Resource_T'Val (Nat_A)),
-                           Resource.Resource_T( Resource.Resource_T'Val (Nat_B))
-                          );
-         Put_Line ("Pusher " & Name & " woke up! ");
+         Table.Table_I.Put(
+                           Resource.Resource_T(
+                             Resource.Resource_T'Val (Missing_Resource)
+                            )
+          );
+         --  delay some time to prepare next resources to put on the table
+         delay 0.5;
       end loop;
    end Pusher_T;
 end Pusher;

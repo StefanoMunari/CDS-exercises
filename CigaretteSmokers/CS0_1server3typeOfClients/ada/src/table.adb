@@ -1,80 +1,82 @@
 with Ada.Text_IO;
+with Amounts;
+
 
 package body Table is
-   use Ada.Text_IO;
+
+   use Ada.Text_IO,
+       Amounts;
 
    protected body Table_I is
 
+      --  a smoker arrives to look which resources are on the table, taking
+      --+ them iff he can smoke with them
       entry Try (A_Resource : Resource.Resource_T ) when
+        --  wait for all queued smokers to check if they can smoke a cigarette
         Queued_Tasks = 0
-        and ResourceA /= Empty -- the first task must check this conditions
-        and ResourceB /= Empty
+      --  check only if there are at least n-1 types of resources on the
+      --+ table, where n is the number of types of resources that a smoker needs
+      --+ to consume a cigarette
+        and not Empty_Table
       is
       begin
-         if A_Resource /= ResourceA and A_Resource /= ResourceB then
-            Put_Line (" TRY => Gained resources :");
-            Put_Line ("  " & Resource_T'Image(ResourceA) );
-            Put_Line ("  " & Resource_T'Image(ResourceB) );
-            ResourceA := Empty;
-            ResourceB := Empty;
+         --  check if there is at least one unit of the resources that the
+         --+ smoker needs
+         Enough_Resources := Amounts.Amounts_I.Look (A_Resource);
+         if Enough_Resources then
+            --  there are enough resources to smoke a cigarette, so take the
+            --+ needed resources from the table
+            Amounts.Amounts_I.Fetch (A_Resource);
+            Put_Line (" TRY => Fetched having resource " &
+                        Resource_T'Image(A_Resource) & "");
+            Put_Line("");
+            --  change the following assignments if system scales to multiple
+            --+ pushers
+            Empty_Table := True;
             Consumed := True;
-        else
+         else
+            --  wait in a higher priority queue for a pusher to put new
+            --+ resources on the table
            requeue Take;
         end if;
       end Try;
 
-      entry Put ( Resource_A, Resource_B : Resource.Resource_T ) when True is
+      --  a pusher can put resources only when a cigarette is consumed
+      entry Put ( A_Resource : Resource.Resource_T ) when Consumed is
       begin
-         -- update the Table state:
-           -- 1) update Resources
-           -- 2) update Queued_Tasks
-         ResourceA := Resource_A;
-         ResourceB := Resource_B;
+         --  once the pusher can put again resources, he also has to wake up
+         --+ any queued task
+         Consumed := False;
+         Put_Line ("PUSHER PUTS ALL BUT " & Resource_T'Image(A_Resource) );
+         Amounts.Amounts_I.Add(A_Resource);
          Queued_Tasks := Take'Count;
-         Put_Line ("== PUSHER PUTS RESOURCES ==");
-         Put_Line ("..." & Resource_T'Image(ResourceA) & "...");
-         Put_Line ("..." & Resource_T'Image(ResourceB) & "...");
-         -- Pusher moved to waiting queue
-         requeue Wait;
+         Empty_Table := False;
       end Put;
 
-      -- PRIVATE
-      entry Wait when Consumed is
-      begin
-         Consumed := False;
-      end Wait;
-
+      --  high priority queue where tasks that already checked resources
+      --+ availability stay
       entry Take ( A_Resource : Resource.Resource_T ) when
-        -- this condition guarantees to not re-check for tasks that have already
-        --check the guard
+        -- Queued_Tasks guarantees to not re-check for tasks that have already
+        -- checked the guard
         Queued_Tasks > 0
-      -- ResourceA and ResourceB WON'T be empty because of Table::Put
-      -- that updates Resources status before than Queued_Tasks status
-      -- (the blocking condition on the guard of this entry)
       is
       begin
-         if A_Resource /= ResourceA
-           and A_Resource /= ResourceB
-         then
-            -- The Smoker task:
-            -- 1) gain Resources;
-            -- 2) update Consume;
-            -- 3) update Resources;
-            Put_Line (" GET => Gained resources :");
-            Put_Line ("  " & Resource_T'Image(ResourceA) );
-            Put_Line ("  " & Resource_T'Image(ResourceB) );
-            ResourceA := Empty;
-            ResourceB := Empty;
-         -- Queued_Tasks set to 0 because it is related to the
-         -- queued tasks counted ONLY WHEN THE RESOURCES ARE AVAIABLE.
-         -- If we don't update to 0 another Queued Task may enter
-         -- into the Get entry and consume empty resources
-         -- before than Pusher Put 2 new resources on the Table!
-            Queued_Tasks := 0;
+         Enough_Resources := Amounts.Amounts_I.Look (A_Resource);
+         if Enough_Resources then
+            --  there are enough resources to smoke a cigarette, so take the
+            --+ needed resources from the table. There is no need to reset
+            --+ queued tasks count to keep fairness
+            Amounts.Amounts_I.Fetch (A_Resource);
+            Put_Line (" TAKE => Fetched having resource " &
+                        Resource_T'Image(A_Resource) );
+            Put_Line("");
+            --  change the following assignments if system scales to multiple
+            --+ pushers
+            Empty_Table := True;
             Consumed := True;
          else
-            -- only in this case is necessary to decrement
-            -- the queued tasks count
+            --  decrement to be checked queued tasks count and requeue this
+            --+ smoker
             Queued_Tasks := Queued_Tasks-1;
             requeue Take;
          end if;
