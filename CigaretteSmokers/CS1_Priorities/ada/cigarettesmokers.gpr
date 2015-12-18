@@ -1,0 +1,25 @@
+project CigaretteSmokers is
+
+   for Languages use ("ada");
+   for Source_Dirs use ("src");
+   for Main use ("cigarette_smokers.adb");
+   type Build_Type is ("PRODUCTION", "DEBUG");
+   Build : Build_Type := external ("Build", "DEBUG");
+
+   for Object_Dir use "obj";
+
+   package Compiler is
+      for Default_Switches ("Ada") use ("-g", "-O2");
+   end Compiler;
+
+   package Builder is
+      case Build is
+         when "DEBUG" =>
+            for Default_Switches ("ada") use ("-g");
+
+         when "PRODUCTION" =>
+            for Default_Switches ("ada") use ();
+      end case;
+   end Builder;
+
+end CigaretteSmokers;
