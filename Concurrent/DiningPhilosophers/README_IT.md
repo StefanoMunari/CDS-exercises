@@ -15,7 +15,7 @@ Ogni filosofo ha alla sua destra una forchetta e di fronte a sè un piatto.
 Ogni filosofo alterna un periodo in cui medita ad un periodo in cui si nutre.  
 Ogni filosofo necessita di 2 forchette per potersi nutrire.  
 
-![alt text](../img/filosofi.jpg "Rappresentazione del problema dei filosofi a cena")
+![alt text](../../img/filosofi.jpg "Rappresentazione del problema dei filosofi a cena")
 
 
 ## Analisi del problema
@@ -44,12 +44,3 @@ L'algoritmo di Peterson generalizzato viene indicato come *Filter Algorithm*.
 Questa soluzione risolve deadlock e starvation.  
 Tuttavia non risolve il problema dell'attesa attiva in quanto
 ogni processo impegna la CPU anche quando non è in esecuzione.
-
-## Soluzione implementata
-
-La soluzione implementata implementa un monitor (TableMonitor) in una modalità
-che permette di parallelizzare l'esecuzione per ⌊n/2⌋ processi evitando starvation,
- deadlock ed attesa attiva.
-Questo si ottiene prendendo il lock sulle coppie di forchette, in pratica
-ogni filosofo prende i lock SOLO sulle forchette che gli interessano. Non esiste
-quindi un lock "globale" sul tavolo.

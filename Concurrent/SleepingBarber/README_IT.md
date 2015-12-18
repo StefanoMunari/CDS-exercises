@@ -14,7 +14,7 @@ All'arrivo del primo cliente il barbiere si sveglia ed inizia a servirlo.
 Se arrivano clienti durante il periodo di attività del barbiere, essi si mettono
 in attesa sui posti disponibili. Se quando un cliente arriva al negozio non ci
 sono più sedie di attesa disponibili allora il cliente se ne va.  
-![alt text](../img/barber.png "Rappresentazione del barbiere sonnolento")
+![alt text](../../img/barber.png "Rappresentazione del barbiere sonnolento")
 
 ## Analisi del problema
 Dalla descrizione del problema emergono chiaramente delle entità
